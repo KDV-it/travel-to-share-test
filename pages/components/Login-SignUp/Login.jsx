@@ -1,10 +1,9 @@
 import Link from "next/link"
-
-
+import "animate.css"
 
 export default function Login() {
   return (
-    <div className="shadow-2xl flex flex-col justify-center items-center rounded-lg border-2 border-brand-color w-1/4 h-3/5 p-5">
+    <div className="animate__animated animate__bounceInDown  shadow-2xl flex flex-col justify-center items-center rounded-lg border-2 border-brand-color w-2/5 h-3/5 p-5">
       <h1 className="px-2 text-2xl font-bold text-brand-color ">Login</h1>
       <p className="text-brand-color">Login with Email</p>
 
@@ -25,7 +24,7 @@ export default function Login() {
       <button className="rounded-lg bg-brand-color w-5/6 h-12 mt-2 text-white font-bold uppercase">Login</button>
       <div className="flex justify-center mt-2 w-5/6">
         <p>No account yet?
-          <Link href="/"><a className="text-brand-color-2 hover:text-brand-color "> Create account</a></Link>
+          <Link href="/sign-up"><a className="text-brand-color-2 hover:text-brand-color "> Create account</a></Link>
         </p>
       </div>
       <div className="w-5/6 flex flex-col justify-center items-center">
@@ -39,7 +38,7 @@ export default function Login() {
           </button>
           <button className=" mx-0.5 flex flex-row justify-center items-center  w-3/6 rounded-lg border-2 border-brand-color ">
             <div className="mt-2 rounded-3xl w-4 h-6">
-              <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" /></svg>
             </div>
             <p className="mx-2">Facebook</p>
           </button>

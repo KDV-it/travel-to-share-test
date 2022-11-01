@@ -1,6 +1,8 @@
 import Link from "next/link"
 import Image from "next/image"
 
+
+//get object avatar after login
 export default function BtnProfile({srcAvt}) {
   return (
     <div className="flex flex-row justify-center items-center w-20 h-10 rounded-3xl border  border-[#b4d1fa] hover:bg-[#d1e4ff] cursor-pointer">
