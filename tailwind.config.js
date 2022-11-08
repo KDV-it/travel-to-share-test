@@ -14,6 +14,7 @@ module.exports = {
       'brand-color': '#427898',
       'brand-color-2': '#b4d1fa',
       'white': '#fff',
+      'gray': '#9ea3ac',
     },
     plugins: [],
   }

@@ -1,31 +1,84 @@
-import { Layout } from './components/Layout'
-import { Login } from './components/Login-SignUp'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signIn, signOut } from "next-auth/react"
+import { Layout } from "./components/Layout"
+import { useFormik } from "formik"
+import login_validate from "./lib/validate"
+import { useRouter } from "next/router"
 
-export default function login() {
-  const { data: session } = useSession();
-  if(session) {
-    return (
-      <Layout title='Profile'>
-        <div>Wellcome, {session.user.email}</div>
-        <button onClick={signOut}>Sign Out</button>
-      </Layout>
-    )
-  }else {
-    return (
-      <Layout title='Login'>
-        <div>You are not Sign in</div>
-        <button onClick={signIn}>Sign In</button>
-      </Layout>
-    )
+export default function Component() {
+  const { data: session } = useSession()
+
+  const router = useRouter()
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validate: login_validate,
+    onSubmit
+  })
+
+  async function onSubmit(values) {
+    const status = await signIn("credentials",
+      {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+        callbackUrl: "/"
+      })
+
+    console.log(status)
+    
+    if (status.ok) {
+      router.push(status.url)
+    }
   }
 
+  async function handleGoogleSignIn() {
+    signIn('google', { callbackUrl: "http://localhost:3000" })
+  }
+  console.log(session)
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    )
+
+  }
   return (
-    <Layout title='Login'>
-      <div className='flex justify-center items-center pt-8'>\
-        {(session) ? <div>Welcome you</div> : <div>You must sign in</div>}
-        <Login />
-      </div>
+    <Layout>
+      Not signed in <br />
+      <form onSubmit={formik.handleSubmit}>
+        <div className="container">
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            {...formik.getFieldProps('email')}
+          />
+        </div>
+        {formik.errors.email && formik.touched.email ? <span>{formik.errors.email}</span> : <></>}
+
+        <div className="container">
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            {...formik.getFieldProps('password')}
+
+          />
+        </div>
+        {formik.errors.password && formik.touched.password ? <span>{formik.errors.password}</span> : <></>}
+
+        <div>
+          <button type="submit">
+            Sign In
+          </button>
+        </div>
+      </form>
+      <button onClick={handleGoogleSignIn}>Sign In With Google</button>
     </Layout>
   )
 }
